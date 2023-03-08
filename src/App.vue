@@ -51,26 +51,7 @@ export default {
     },
   },
   created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: 'Buy Flowers',
-        day: 'March 8th at 10:00am',
-        reminder: true,
-      },
-      {
-        id: 2,
-        text: 'Shop T-Shirt',
-        day: 'March 10th at 16:00pm',
-        reminder: true,
-      },
-      {
-        id: 3,
-        text: 'Start a Stream',
-        day: 'March 6th at 10am',
-        reminder: false,
-      },
-    ];
+    this.tasks = [];
   },
 };
 </script>
