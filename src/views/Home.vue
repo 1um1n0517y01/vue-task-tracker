@@ -30,9 +30,12 @@ export default {
   methods: {
     async deleteTask(id) {
       if (confirm('Do you want to delete this task?')) {
-        const res = await fetch(`api/tasks/${id}`, {
-          method: 'DELETE',
-        });
+        const res = await fetch(
+          `https://json-server-vue-task-tracker-milos.glitch.me/tasks/${id}`,
+          {
+            method: 'DELETE',
+          }
+        );
 
         res.status === 200
           ? (this.tasks = this.tasks.filter((task) => task.id !== id))
@@ -43,26 +46,32 @@ export default {
       const taskToToggle = await this.fetchTask(id);
       const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
 
-      await fetch(`api/tasks/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedTask),
-      });
+      await fetch(
+        `https://json-server-vue-task-tracker-milos.glitch.me/tasks/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedTask),
+        }
+      );
 
       this.tasks = this.tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
       );
     },
     async addTask(task) {
-      const res = await fetch('api/tasks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(task),
-      });
+      const res = await fetch(
+        'https://json-server-vue-task-tracker-milos.glitch.me/tasks',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(task),
+        }
+      );
 
       const data = await res.json();
 
@@ -70,13 +79,17 @@ export default {
     },
 
     async fetchTasks() {
-      const res = await fetch('api/tasks');
+      const res = await fetch(
+        'https://json-server-vue-task-tracker-milos.glitch.me/tasks'
+      );
       const data = await res.json();
 
       return data;
     },
     async fetchTask(id) {
-      const res = await fetch(`api/tasks/${id}`);
+      const res = await fetch(
+        `https://json-server-vue-task-tracker-milos.glitch.me/tasks/${id}`
+      );
       const data = await res.json();
 
       return data;
