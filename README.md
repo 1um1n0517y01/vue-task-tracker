@@ -1,19 +1,9 @@
-# vue-task-tracker
+# VueTaskTracker
 
-## Project setup
-```
-npm install
-```
+Live app: https://vue-task-tracker-milos.netlify.app/<br>
+JSON data: https://json-server-vue-task-tracker-milos.glitch.me/tasks
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Click data link first since server goes to sleep due to inactivity.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Double left-click on Task to enable/disable reminder.<br>
+Add new Task or remove it.
