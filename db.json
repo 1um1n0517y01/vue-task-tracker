@@ -10,12 +10,12 @@
       "id": 2,
       "text": "Shop T-Shirt",
       "day": "March 10th at 16:00pm",
-      "reminder": false
+      "reminder": true
     },
     {
       "text": "Start a Stream",
       "day": "March 6th at 10am",
-      "reminder": true,
+      "reminder": false,
       "id": 3
     }
   ]
