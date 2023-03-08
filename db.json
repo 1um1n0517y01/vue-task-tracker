@@ -15,7 +15,7 @@
     {
       "text": "Start a Stream",
       "day": "March 6th at 10am",
-      "reminder": true,
+      "reminder": false,
       "id": 3
     }
   ]
