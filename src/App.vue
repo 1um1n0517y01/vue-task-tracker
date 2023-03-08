@@ -49,16 +49,13 @@ export default {
       const taskToToggle = await this.fetchTask(id);
       const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
 
-      const res = await fetch(`api/tasks/${id}`, {
+      await fetch(`api/tasks/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(updatedTask),
       });
-
-      const data = await res.json();
-      console.log(data);
 
       this.tasks = this.tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
