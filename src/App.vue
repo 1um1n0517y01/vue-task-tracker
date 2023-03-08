@@ -5,7 +5,7 @@
       :showAddTask="showAddTask"
       title="Task Tracker"
     />
-    <div v-if="showAddTask"><AddTask @add-task="AddTask" /></div>
+    <div v-if="showAddTask"><AddTask @add-task="addTask" /></div>
 
     <Tasks
       @toggle-reminder="toggleRreminder"
@@ -34,17 +34,48 @@ export default {
     };
   },
   methods: {
-    deleteTask(id) {
-      if (confirm('Do you want to delete this task?'))
-        this.tasks = this.tasks.filter((task) => task.id !== id);
+    async deleteTask(id) {
+      if (confirm('Do you want to delete this task?')) {
+        const res = await fetch(`api/tasks/${id}`, {
+          method: 'DELETE',
+        });
+
+        res.status === 200
+          ? (this.tasks = this.tasks.filter((task) => task.id !== id))
+          : alert('Error deleting Task!');
+      }
     },
-    toggleRreminder(id) {
+    async toggleRreminder(id) {
+      const taskToToggle = await this.fetchTask(id);
+      const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+
+      const res = await fetch(`api/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedTask),
+      });
+
+      const data = await res.json();
+      console.log(data);
+
       this.tasks = this.tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
       );
     },
-    AddTask(task) {
-      this.tasks = [...this.tasks, task];
+    async addTask(task) {
+      const res = await fetch('api/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(task),
+      });
+
+      const data = await res.json();
+
+      this.tasks = [...this.tasks, data];
     },
     toggleAddTask() {
       this.showAddTask = !this.showAddTask;
